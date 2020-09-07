@@ -1,0 +1,24 @@
+
+@font-face {
+    font-family: "HankRnd-Regular";
+    src: url("./Hank-Rounded/HankRnd-Regular.ttf") format("opentype");
+  }
+
+  
+@font-face {
+    font-family: "HankRnd-Black";
+    src: url("./Hank-Rounded/HankRnd-Black.ttf") format("opentype");
+  }
+
+  
+@font-face {
+    font-family: "HankRnd-Bold";
+    src: url("./Hank-Rounded/HankRnd-Bold.ttf") format("opentype");
+  }
+
+  
+@font-face {
+    font-family: "HankRnd-Light";
+    src: url("./Hank-Rounded/HankRnd-Light.ttf") format("opentype");
+  }
+

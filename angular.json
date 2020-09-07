@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "karin-app"
+    }
+  },
+  "defaultProject": "karin-app",
+  "cli": {
+    "analytics": false
+  }
 }

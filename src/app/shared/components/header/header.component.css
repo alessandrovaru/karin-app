@@ -1,0 +1,10 @@
+  
+.logospan{
+    font-family: 'HankRnd-regular', "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.display-a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

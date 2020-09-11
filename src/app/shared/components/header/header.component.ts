@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@app/pages/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   isAdmin = false;
 
-  constructor() { }
+  constructor(private authSvc: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  onLogout(): void{
+    this.authSvc.logout();
   }
 
 }

@@ -5,6 +5,13 @@ export interface User{
     password: string;
 }
 
+export interface NewUser{
+    username: string;
+    password: string;
+    role: Roles;
+}
+
+
 export interface UserResponse{
     message: string;
     token: string;

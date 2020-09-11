@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private subscription: Subscription;
 
   loginForm = this.fb.group({
     username: [''],
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     ) {}
+
 
   ngOnInit(): void {}
 

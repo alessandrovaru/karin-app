@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { UserResponse, User } from '@app/shared/models/user.interface';
+import { UserResponse, User, Roles } from '@app/shared/models/user.interface';
 import { catchError, map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 const helper = new JwtHelperService();
 
@@ -13,8 +14,9 @@ const helper = new JwtHelperService();
 })
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private role = new BehaviorSubject<Roles>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.checkToken();
   }
 
@@ -22,12 +24,16 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  get isAdmin$(): Observable<string>{
+    return this.role.asObservable();
+  }
+
   login(authData: User): Observable<UserResponse | void>{
     return this.http
     .post<UserResponse>(`${environment.API_URL}/auth/login`, authData)
     .pipe(
         map((res: UserResponse) => {
-          this.saveToken(res.token);
+          this.saveLocalStorage(res);
           this.loggedIn.next(true);
           return res;
         }),
@@ -35,23 +41,33 @@ export class AuthService {
       );
   }
 
+
+
   logout(): void{
-    localStorage.removeItem('token');
+    this.role.next(null);
+    localStorage.removeItem('user');
     this.loggedIn.next(false);
+    this.router.navigate(['login']);
   }
 
   private checkToken(): void{
-    const userToken = localStorage.getItem('token');
-    const isExpired = helper.isTokenExpired(userToken);
-    console.log('Expired', isExpired);
-    if (isExpired) {
-      this.logout();
-    }else{
-      this.loggedIn.next(true);
+    const user = JSON.parse(localStorage.getItem('user')) || null;
+
+    if (user) {
+      const isExpired = helper.isTokenExpired(user.token);
+
+      if (isExpired) {
+        this.logout();
+      }else{
+        this.loggedIn.next(true);
+        this.role.next(user.role);
+      }
     }
   }
-  private saveToken(token: string): void{
-    localStorage.setItem('token', token);
+  private saveLocalStorage(user: UserResponse): void{
+    const {userId, message, ...rest} = user;
+    localStorage.setItem('user', JSON.stringify(rest));
+    this.role.next(user.role);
   }
   private handlerError(err): Observable<never>{
     let errorMessage = 'Error retrieving data';

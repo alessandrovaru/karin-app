@@ -7,7 +7,16 @@ export interface User{
 
 export interface NewUser{
     username: string;
+    email: string;
     password: string;
+    role: Roles;
+}
+
+
+export interface UserCreated{
+    message: string;
+    token: string;
+    userId: number;
     role: Roles;
 }
 

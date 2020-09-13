@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -14,11 +13,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 const myModules = [
-    BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
     MatAutocompleteModule,
@@ -33,6 +32,8 @@ const myModules = [
     MatChipsModule,
     MatIconModule,
     MatTableModule,
+    MatCheckboxModule,
+    MatTabsModule
 ];
 
 @NgModule({

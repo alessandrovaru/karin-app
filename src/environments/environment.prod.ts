@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API_URL: 'https://lit-peak-24861.herokuapp.com'
 };

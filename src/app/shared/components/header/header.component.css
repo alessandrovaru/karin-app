@@ -8,3 +8,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.nav-transparent {
+    background-color: #e2f6ff!important;
+    position: fixed;
+    width: 100vw;
+    z-index: 3;
+    top: 0;
+}
